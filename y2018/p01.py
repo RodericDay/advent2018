@@ -1,5 +1,6 @@
 import itertools
 
+
 def main(text, simple):
     stuff = [int(n) for n in text.splitlines()]
     if simple:

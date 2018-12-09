@@ -1,4 +1,5 @@
-*.txt
+p*.txt
 __pycache__/
 makefile
 .env
+venv/

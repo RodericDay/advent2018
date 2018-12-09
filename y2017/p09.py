@@ -9,6 +9,7 @@ def score(thing, prev=0):
 
 def main(text, simple):
     count = 0
+
     def cleaner(match):
         nonlocal count
         count += len(match.group(1))
@@ -16,7 +17,7 @@ def main(text, simple):
 
     text = re.sub(r'!.', '', text)
     text = re.sub(r'<([^>]*?)>', cleaner, text)
-    text = text.replace('{','[').replace('}',']')
+    text = text.replace('{', '[').replace('}', ']')
 
     if simple:
         print(score(eval(text)))

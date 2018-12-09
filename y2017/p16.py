@@ -1,28 +1,32 @@
-import functools
-
 def p(a, b):
     def f(dancers):
         i, j = dancers.index(a), dancers.index(b)
         dancers[i], dancers[j] = b, a
     return f
 
+
 def x(a, b):
     a, b = int(a), int(b)
+
     def f(dancers):
         dancers[a], dancers[b] = dancers[b], dancers[a]
     return f
 
+
 def s(a):
     a = int(a)
+
     def f(dancers):
         dancers[:] = dancers[-a:] + dancers[:-a]
     return f
 
+
 def spin(moves, dancers):
-    l = list(dancers)
+    dancers = list(dancers)
     for move in moves:
-        move(l)
-    return ''.join(l)
+        move(dancers)
+    return ''.join(dancers)
+
 
 def main(text, simple, cache={}):
     dancers = ''.join(chr(ord('a') + i) for i in range(16))

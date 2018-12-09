@@ -1,6 +1,7 @@
 import collections
 import itertools
 
+
 def main(text, simple):
     lines = text.splitlines()
     if simple:

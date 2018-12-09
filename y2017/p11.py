@@ -1,5 +1,10 @@
 import itertools
 
+
+def step_dist(distance):
+    return (abs(distance.imag) - distance.real) // 2 + distance.real
+
+
 def main(text, simple):
     transform = {
         'n': -2j,
@@ -10,10 +15,8 @@ def main(text, simple):
         's': 2j,
     }
 
-    def step_dist(distance):
-        return (abs(distance.imag) - distance.real) // 2 + distance.real
-
-    history = [step_dist(d) for d in itertools.accumulate(transform[d] for d in text.split(','))]
+    moves = [transform[d] for d in text.split(',')]
+    history = [step_dist(d) for d in itertools.accumulate(moves)]
 
     if simple:
         print(history[-1])

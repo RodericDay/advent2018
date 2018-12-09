@@ -1,5 +1,6 @@
-import re
 import collections
+import re
+
 
 def particle(px, py, pz, vx, vy, vz, ax, ay, az):
     while True:
@@ -11,6 +12,7 @@ def particle(px, py, pz, vx, vy, vz, ax, ay, az):
         pz += vz
         yield px, py, pz
 
+
 def main(text, simple):
     particles = [
         [int(n) for n in re.findall(r'-?\d+', line)]
@@ -18,7 +20,9 @@ def main(text, simple):
     ]
 
     if simple:
-        print(min((sum(abs(n) for n in p[-3:]), sum(abs(n) for n in p[:3]), i) for i, p in enumerate(particles))[2])
+        sum3 = lambda a, b, c: abs(a) + abs(b) + abs(c)
+        key = lambda i: (sum3(*particles[i][-3:]), sum3(*particles[i][:3]))
+        print(min(range(len(particles)), key=key))
     else:
         gs = [particle(*p) for p in particles]
         for iteration in range(100):

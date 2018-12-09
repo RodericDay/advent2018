@@ -1,6 +1,6 @@
-import re
 import collections
-import copy
+import re
+
 
 def main(text, simple):
     tasks_left = set()
@@ -20,7 +20,8 @@ def main(text, simple):
     C = 0
     M = ''
     while tasks_left:
-        tasks_available = sorted([t for t in tasks_left
+        tasks_available = sorted([
+            t for t in tasks_left
             if not requirements[t]
             if t not in workers.values()
         ], reverse=True)
@@ -37,7 +38,8 @@ def main(text, simple):
                     M += task
 
         tasks_left = {t for t, w in work_left.items() if w != 0}
-        for r in requirements.values(): r &= tasks_left
+        for r in requirements.values():
+            r &= tasks_left
         C += 1
 
     if simple:

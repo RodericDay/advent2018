@@ -1,5 +1,7 @@
 def main(text, simple):
+    word_list = [line.split() for line in text.splitlines()]
     if simple:
-        print(sum(len(words) == len(set(words)) for line in text.splitlines() for words in [line.split()]))
+        valid = lambda words: len(words) == len(set(words))
     else:
-        print(sum(len(words) == len(set(map(frozenset, words))) for line in text.splitlines() for words in [line.split()]))
+        valid = lambda words: len(words) == len(set(map(frozenset, words)))
+    print(sum(valid(words) for words in word_list))

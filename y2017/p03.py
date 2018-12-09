@@ -1,29 +1,27 @@
 import collections
 
+
 def main(text, simple):
     n = int(text)
 
     if simple:
         N = next(i for i in range(10000) if i**2 > n)
-        m = (N - 1) / 2
+        m = (N - 1) // 2
         print(m + m - (N**2 - n))
 
     else:
-        N = 5
         grid = collections.defaultdict(int)
-        around = {x + 1j*y for x in range(-1, 2) for y in range (-1, 2)} - {0}
-        ans = None
+        around = {x + 1j * y for x in [-1, 0, 1] for y in [-1, 0, 1]} - {0}
         p = 0
-        for ring in range(N):
-            for step in [-1j] * (2 * ring - 1) + [-1] * (2 * ring) + [1j] * (2 * ring) + [1] * (2 * ring + 1):
-                # grid[p] = len(grid) + 1
-                grid[p] = sum(grid[p + dp] for dp in around) if len(grid) else 1
-                if not ans and grid[p] > n:
-                    ans = grid[p]
+        for rung in range(999):
+            S = 2 * rung  # side length
+            steps = [-1j] * (S - 1) + [-1] * (S) + [1j] * (S) + [1] * (S + 1)
+            for step in steps:
+                grid[p] = sum(grid[p + dp] for dp in around) if p else 1
+                if grid[p] > n:
+                    print(grid[p])
+                    return
                 p += step
-
-        display(grid, 5)
-        print(ans)
 
 
 def display(grid, N):

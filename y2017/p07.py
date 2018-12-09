@@ -1,5 +1,5 @@
-import re
 import collections
+import re
 
 
 def main(text, simple):
@@ -22,7 +22,8 @@ def main(text, simple):
 
     def total_weight(name, cache={}):
         if name not in cache:
-            cache[name] = weight[name] + sum(total_weight(name) for name in forward[name])
+            extra = sum(total_weight(name) for name in forward[name])
+            cache[name] = weight[name] + extra
         return cache[name]
 
     def odd_one_out(name):
@@ -39,4 +40,3 @@ def main(text, simple):
         except ValueError:
             print(weight[base] + offset)
             break
-

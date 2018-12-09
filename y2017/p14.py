@@ -4,12 +4,12 @@ from y2017.p10 import knot_hash
 def connected_components(grid, mov={1, -1, 1j, -1j}):
     groups = []
     while grid:
-        active = {grid.pop()}
+        pending = {grid.pop()}
         seen = set()
-        while active:
-            seen |= active
-            grid -= active
-            active = {pos + step for pos in active for step in mov if pos + step in grid}
+        while pending:
+            seen |= pending
+            grid -= pending
+            pending = {pos + step for pos in pending for step in mov} & grid
         groups.append(seen)
     return groups
 
@@ -17,7 +17,8 @@ def connected_components(grid, mov={1, -1, 1j, -1j}):
 def main(text, simple):
     grid = set()
     for y in range(128):
-        for x, v in enumerate(''.join(f"{int(c, 16):0>4b}" for c in knot_hash(f"{text}-{y}"))):
+        row = ''.join(f"{int(c, 16):0>4b}" for c in knot_hash(f"{text}-{y}"))
+        for x, v in enumerate(row):
             if v == '1':
                 grid.add(x + 1j * y)
 

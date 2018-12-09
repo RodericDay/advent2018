@@ -1,5 +1,6 @@
 import collections
 
+
 def program(text, pid, qrcv, qsnd):
     lines = text.splitlines()
     r = collections.defaultdict(int)
@@ -28,7 +29,7 @@ def program(text, pid, qrcv, qsnd):
             r[X] %= r[Y]
         elif f == 'jgz':
             if r[X] > 0:
-                i += r[Y] - 1 # take back the step taken
+                i += r[Y] - 1  # take back the step taken
         elif f == 'snd':
             qsnd.append(r[X])
         elif f == 'rcv':

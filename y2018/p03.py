@@ -1,5 +1,5 @@
-import re
 import collections
+import re
 
 
 def main(text, simple):
@@ -7,8 +7,8 @@ def main(text, simple):
 
     for line in text.splitlines():
         i, x, y, w, h = [int(n) for n in re.findall(r'\d+', line)]
-        for xi in range(x, x+w):
-            for yi in range(y, y+h):
+        for xi in range(x, x + w):
+            for yi in range(y, y + h):
                 d[xi, yi] += 1
 
     if simple:
@@ -17,9 +17,10 @@ def main(text, simple):
     else:
         for line in text.splitlines():
             i, x, y, w, h = [int(n) for n in re.findall(r'\d+', line)]
-            total = {d[xi, yi]
-                for xi in range(x, x+w)
-                for yi in range(y, y+h)
+            total = {
+                d[xi, yi]
+                for xi in range(x, x + w)
+                for yi in range(y, y + h)
             }
             if total == {1}:
                 print(i)

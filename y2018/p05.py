@@ -1,5 +1,6 @@
 import re
 
+
 def reduct(text):
     diff = ord('a') - ord('A')
 
@@ -13,10 +14,12 @@ def reduct(text):
 
     return text
 
+
 def main(text, simple):
     if simple:
         print(len(reduct(text)))
     else:
         text = reduct(text)
-        subs = [re.sub(c, '', text, flags=re.IGNORECASE) for c in set(text.lower())]
+        unique = set(text.lower())
+        subs = [re.sub(c, '', text, flags=re.IGNORECASE) for c in unique]
         print(len(min(map(reduct, subs), key=len)))

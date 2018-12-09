@@ -1,6 +1,8 @@
 import collections
 
+
 Tree = collections.namedtuple("Tree", "children meta")
+
 
 def main(text, simple):
     if simple:
@@ -10,8 +12,10 @@ def main(text, simple):
         print(sum_meta(tree))
         print(sum_real(tree))
 
+
 def sum_meta(tree):
     return sum(tree.meta + [sum_meta(leaf) for leaf in tree.children])
+
 
 def sum_real(tree):
     if not tree.children:
@@ -19,6 +23,7 @@ def sum_real(tree):
     else:
         valid = (i - 1 for i in tree.meta if i - 1 < len(tree.children))
         return sum(sum_real(tree.children[k]) for k in valid)
+
 
 def parse(data):
     n_children = data.pop()
