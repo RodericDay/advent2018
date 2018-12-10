@@ -20,7 +20,7 @@ def main(text, simple):
             p[x] += d.pop()
             d.rotate(-1)
 
-        # visualize if need
+        # visualize
         # c = collections.deque(d)
         # c.rotate(-c.index(0))
         # print(x, ['*' if n == d[-1] else n for n in c])
