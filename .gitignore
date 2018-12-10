@@ -1,6 +1,5 @@
 p*.txt
 __pycache__/
-makefile
 .env
 venv/
 sols.json
