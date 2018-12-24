@@ -26,5 +26,6 @@ def web(path):
 paths = pathlib.Path().rglob("y*/p*.py")
 dix = multiprocessing.Pool().map(web, paths)
 d = functools.reduce(lambda a, b: {**a, **b}, dix, {})
+d = {k: d[k] for k in sorted(d)}
 with open("sols.json", "w") as fp:
     json.dump(d, fp, indent=2)
